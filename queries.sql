@@ -44,3 +44,92 @@ FROM animals
 WHERE
     weight_kg >= 10.40
     AND weight_kg <= 17.30;
+
+--Inside a transaction update the animals table by setting the species column to unspecified. Verify that change was made. Then roll back the change and verify that the species columns went back to the state before the transaction
+
+BEGIN TRANSACTION;
+
+UPDATE animals SET species = 'unspecified';
+
+SELECT * FROM animals;
+
+ROLLBACK TRANSACTION;
+
+SELECT * FROM animals;
+
+-- Transaction for first screenshot
+
+BEGIN TRANSACTION;
+
+UPDATE animals SET species = 'digimon' WHERE "name" LIKE '%mon';
+
+SELECT * FROM animals;
+
+UPDATE animals SET species = 'pokemon' WHERE species IS NULL;
+
+SELECT * FROM animals;
+
+COMMIT TRANSACTION;
+
+SELECT * FROM animals;
+
+-- Transaction for Second screenshot
+
+BEGIN TRANSACTION;
+
+DELETE FROM animals;
+
+SELECT * FROM animals;
+
+ROLLBACK TRANSACTION;
+
+SELECT * FROM animals;
+
+-- Transaction for Third screenshot
+
+BEGIN TRANSACTION;
+
+DELETE FROM animals WHERE date_of_birth > '2022-01-01';
+
+SELECT * FROM animals;
+
+SAVEPOINT SP1;
+
+UPDATE animals SET weight_kg = weight_kg * -1;
+
+SELECT * FROM animals;
+
+ROLLBACK TO SAVEPOINT SP1;
+
+SELECT * FROM animals;
+
+UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
+
+SELECT * FROM animals;
+
+COMMIT TRANSACTION;
+
+-- Queries to answer the questions
+
+SELECT COUNT(name) FROM animals;
+
+SELECT COUNT(escape_attempts) FROM animals WHERE escape_attempts = 0;
+
+SELECT avg(weight_kg) from animals;
+
+select neutered, max(escape_attempts) from animals group by neutered;
+
+select
+    species,
+    max(weight_kg),
+    min(weight_kg)
+from animals
+group by species;
+
+SELECT
+    species,
+    AVG(escape_attempts) AS average_escape_attempts
+FROM animals
+WHERE
+    date_of_birth BETWEEN '1990-01-01' AND '2000-12-31'
+GROUP BY species;
