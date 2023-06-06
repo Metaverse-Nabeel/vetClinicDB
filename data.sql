@@ -11,7 +11,7 @@ INSERT INTO
     )
 VALUES (
         1,
-        'Agumon ',
+        'Agumon',
         '2020-02-03',
         0,
         true,
@@ -32,7 +32,7 @@ VALUES (
         15.04
     ), (
         4,
-        'Devimon ',
+        'Devimon',
         '2017-05-12',
         5,
         true,
@@ -92,7 +92,7 @@ VALUES (
         17.00
     ), (
         11,
-        'Ditto ',
+        'Ditto',
         '2022-05-14',
         4,
         true,
