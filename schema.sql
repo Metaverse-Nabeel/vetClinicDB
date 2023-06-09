@@ -17,3 +17,36 @@ CREATE TABLE
 /* Update Database schema with species column. */
 
 ALTER TABLE animals ADD species VARCHAR(255);
+
+-- create owners table
+
+CREATE TABLE
+    owners(
+        id int generated always as identity,
+        full_name VARCHAR(250),
+        age INT,
+        PRIMARY Key (id)
+    );
+
+-- Create species table
+
+CREATE TABLE
+    species(
+        id int generated always as identity,
+        name VARCHAR(250),
+        PRIMARY Key (id)
+    );
+
+ALTER TABLE animals DROP COLUMN id;
+
+ALTER TABLE animals DROP COLUMN species;
+
+ALTER TABLE animals ADD id INT GENERATED ALWAYS AS IDENTITY;
+
+ALTER TABLE animals ADD PRIMARY KEY (id);
+
+ALTER TABLE animals
+ADD
+    COLUMN species_id INTEGER REFERENCES species(id),
+ADD
+    COLUMN owner_id INTEGER REFERENCES owners(id);
