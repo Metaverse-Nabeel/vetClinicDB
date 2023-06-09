@@ -55,6 +55,7 @@
 - **[Make Animals table]**
 - **[Insert values into the Animals table]**
 - **[Query through the animals database]**
+- **[Use Join for multiple tables]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
